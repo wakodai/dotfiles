@@ -44,9 +44,27 @@ else
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-
 # install p10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+# Powerlevel10k のインストールディレクトリを定義
+P10K_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+# Powerlevel10k がインストールされているか確認
+if [ -d "$P10K_DIR" ]; then
+    echo "Powerlevel10k is already installed. Skipping installation."
+else
+    echo "Powerlevel10k is not installed. Installing Powerlevel10k..."
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$P10K_DIR"
+fi
+
+# fzf-tab のインストールディレクトリを定義
+FZF_TAB_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+# fzf-tab がインストールされているか確認
+if [ -d "$FZF_TAB_DIR" ]; then
+    echo "fzf-tab is already installed. Skipping installation."
+else
+    echo "fzf-tab is not installed. Installing fzf-tab..."
+    git clone https://github.com/Aloxaf/fzf-tab "$FZF_TAB_DIR"
+fi
+
 
 # deploy dotfiles on home dir
 for i in .?*; do
