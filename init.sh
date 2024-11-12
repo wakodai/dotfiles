@@ -22,7 +22,6 @@ else
     echo "Homebrew is already installed. Skipping."
 fi
 
-
 # Install rosetta2
 # AppleシリコンかつRosettaが未インストールの場合にのみ実行
 if [[ $(uname -m) == "arm64" ]]; then
@@ -36,6 +35,13 @@ else
     echo "This is not an Apple Silicon Mac. Skipping Rosetta installation."
 fi
 
+# install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# install p10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# deploy dotfiles on home dir
 for i in .?*; do
   echo "$i"
   if [ "$i" != '..' ] && [ "$i" != '.git' ]; then
@@ -43,6 +49,7 @@ for i in .?*; do
   fi
 done
 
+# deploy dotfiles on .config dir
 # yabai
 mkdir -p ~/.config/yabai
 ln -Fsi ~/dotfiles/yabai/yabairc ~/.config/yabai/yabairc
