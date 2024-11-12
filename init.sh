@@ -62,3 +62,7 @@ ln -Fsi ~/dotfiles/karabiner ~/.config/
 # iterm2
 mkdir -p ~/.config/iterm2
 ln -Fsi ~/dotfiles/iterm2 ~/.config/
+
+# make mount point
+mkdir -p ~/mount_bezos_m2
+mkdir -p ~/mount_bezos_sda
