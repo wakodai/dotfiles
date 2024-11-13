@@ -98,3 +98,7 @@ ln -Fsi ~/dotfiles/iterm2 ~/.config/
 # make mount point
 mkdir -p ~/mount_bezos_m2
 mkdir -p ~/mount_bezos_sda
+
+# scripts dir deploy
+ln -Fsi ~/dotfiles/Scripts ~/.
+

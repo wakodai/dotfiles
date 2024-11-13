@@ -117,3 +117,7 @@ source $ZSH/oh-my-zsh.sh
 # fzf
 source <(fzf --zsh)
 
+# configuration
+HISTSIZE=100000
+SAVEHIST=100000
+

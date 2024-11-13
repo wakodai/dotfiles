@@ -13,7 +13,7 @@ yabai -m config layout bsp
 yabai -m config focus_follows_mouse autoraise
 
 # set mouse follows focus mode (default: off)
-yabai -m config mouse_follows_focus on
+yabai -m config mouse_follows_focus off
 
 # modify window shadows (default: on, options: on, off, float)
 # example: show shadows only for floating windows
@@ -29,4 +29,7 @@ yabai -m config window_shadow on
 #yabai -m rule --add app='^$' manage=off
 yabai -m rule --add app='^システム設定$' manage=off
 yabai -m rule --add app='^Finder$' manage=off
+
+# window open position
+#yabai -m config window_opens_in_current_space on
 
