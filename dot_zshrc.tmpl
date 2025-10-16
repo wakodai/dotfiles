@@ -181,7 +181,6 @@ function mov2wav() {
     fi
 }
 
-# ssh-agent
 # SSH Agentを起動し、環境変数を設定
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval "$(ssh-agent -s)"
@@ -192,7 +191,6 @@ if [[ -f "$HOME/.ssh/id_rsa" ]]; then
   ssh-add "$HOME/.ssh/id_rsa" > /dev/null 2>&1
 fi
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
 export EDITOR='vim'
 export VISUAL='vim'
+
