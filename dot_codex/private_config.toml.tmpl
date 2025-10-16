@@ -19,7 +19,7 @@ network_access = true   # これで外向き通信を事前許可
 [mcp_servers.brave-search]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-brave-search"]
-env = { "BRAVE_API_KEY" = "BSAjpEpwJ5CL8sJ2h5C0zIXDvLZeB7E" }
+env = { "BRAVE_API_KEY" = "{{ keyring "codex-brave_api_key" .chezmoi.username }}" }
 
 [mcp_servers.playwright]
 command = "npx"
@@ -47,16 +47,6 @@ args = [
   "BACKLOG_API_KEY",
   "ghcr.io/nulab/backlog-mcp-server",
 ]
-env = { BACKLOG_DOMAIN = "eucg.backlog.com", BACKLOG_API_KEY = "Uezq9MBZf1XE0nIJxpDFYIKywRYi1KwAAVAVkXif7h485mF2EFBwWPSuLEvxWgaH" }
+env = { BACKLOG_DOMAIN = "eucg.backlog.com", BACKLOG_API_KEY = "{{ keyring "codex-backlog_api_key" .chezmoi.username }}" }
 
-[mcp_servers.zenhub]
-command = "npx"
-args = [
-  "-y",
-  "mcp-remote",
-  "https://api.zenhub.com/mcp",
-  "--header",
-  "Authorization:31a488d35d191551a13c3eb5ef70df58c63234eee1bbe544b2289596ceefac54769cc8f0f3fa35f5",
-  "--header",
-  "X-zh-workspace:684817f6499a2f001ad2211c",
-]
+
