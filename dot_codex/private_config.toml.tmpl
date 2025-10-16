@@ -4,8 +4,8 @@
 {{- $braveKey = keyring "codex-brave_api_key" .chezmoi.username -}}
 {{- $backlogKey = keyring "codex-backlog_api_key" .chezmoi.username -}}
 {{- else if eq .chezmoi.os "linux" -}}
-{{- $braveKey = decrypt (include "private_codex/brave_api_key.age") -}}
-{{- $backlogKey = decrypt (include "private_codex/backlog_api_key.age") -}}
+{{- $braveKey = decrypt (include "codex-brave_api_key.age") -}}
+{{- $backlogKey = decrypt (include "codex-backlog_api_key.age") -}}
 {{- end -}}
 {{- $home := .chezmoi.homeDir -}}
 projects = {
