@@ -1,4 +1,12 @@
-export PATH="/opt/homebrew/bin:$PATH"
+{{ if eq .chezmoi.os "darwin" -}}
+if [[ -d /opt/homebrew/bin ]]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+fi
+{{- else if eq .chezmoi.os "linux" -}}
+if [[ -d /home/linuxbrew/.linuxbrew/bin ]]; then
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
+{{- end }}
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -180,7 +188,9 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 # 秘密鍵を ssh-agent に登録
 # (新しいセッションでは引き継がれないので毎回登録)
-ssh-add /Users/wakodai/.ssh/id_rsa > /dev/null 2>&1
+if [[ -f "$HOME/.ssh/id_rsa" ]]; then
+  ssh-add "$HOME/.ssh/id_rsa" > /dev/null 2>&1
+fi
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
