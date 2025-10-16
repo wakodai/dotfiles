@@ -8,8 +8,7 @@
 {{- $backlogKey = decrypt (include "codex-backlog_api_key.age") -}}
 {{- end -}}
 {{- $home := .chezmoi.homeDir -}}
-projects = {
-  "{{ $home }}/git-repository/codex-test" = { trust_level = "trusted" }, "{{ $home }}/git-repository/codex-message-board" = { trust_level = "trusted" }, "{{ $home }}/git-repository/aogawa-scraping" = { trust_level = "trusted" }, "{{ $home }}/git-repository/rehabilitation-management-app" = { trust_level = "trusted" }}
+projects = { "{{ $home }}/git-repository/codex-test" = { trust_level = "trusted" }, "{{ $home }}/git-repository/codex-message-board" = { trust_level = "trusted" }, "{{ $home }}/git-repository/aogawa-scraping" = { trust_level = "trusted" }, "{{ $home }}/git-repository/rehabilitation-management-app" = { trust_level = "trusted" }}
 model_reasoning_effort = "high"
 # model_reasoning_summary = "none"
 model_reasoning_summary = "auto"
