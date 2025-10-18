@@ -52,3 +52,11 @@ args = [
   "ghcr.io/nulab/backlog-mcp-server",
 ]
 env = { BACKLOG_DOMAIN = "eucg.backlog.com", BACKLOG_API_KEY = {{ printf "%s" $backlogKey | quote }} }
+
+[mcp_servers.deepwiki]
+command = "npx"
+args = [
+  "mcp-remote",
+  "https://mcp.deepwiki.com/sse"
+]
+
