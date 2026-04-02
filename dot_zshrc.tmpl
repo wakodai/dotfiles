@@ -193,3 +193,23 @@ fi
 
 export EDITOR='vim'
 export VISUAL='vim'
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# mp4をmp3に変換
+mp4tomp3 () {
+  if [ -z "$1" ]; then
+    echo "使い方: mp4tomp3 入力.mp4 [出力.mp3]"
+    return 1
+  fi
+
+  input="$1"
+  output="${2:-${1%.mp4}.mp3}"
+
+  if [ -e "$output" ]; then
+    echo "すでに存在します: $output"
+    return 1
+  fi
+
+  ffmpeg -i "$input" -vn -c:a libmp3lame -q:a 2 "$output"
+}
