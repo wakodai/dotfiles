@@ -183,7 +183,7 @@ function mov2wav() {
 
 # SSH Agentを起動し、環境変数を設定
 if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -s)"
+    eval "$(ssh-agent -s)" > /dev/null
 fi
 # 秘密鍵を ssh-agent に登録
 # (新しいセッションでは引き継がれないので毎回登録)
