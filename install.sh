@@ -14,6 +14,12 @@ fi
 # --source points to the cloned dotfiles repo (the current directory)
 chezmoi init --source="$(pwd)" --apply
 
+# Ensure ~/.local/bin is in PATH
+if ! grep -q 'HOME/.local/bin' "$HOME/.bashrc" 2>/dev/null; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+fi
+export PATH="$HOME/.local/bin:$PATH"
+
 # Install Claude Code CLI if not present
 if ! command -v claude &>/dev/null; then
     curl -fsSL https://claude.ai/install.sh | bash
