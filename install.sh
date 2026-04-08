@@ -13,3 +13,8 @@ fi
 # Apply dotfiles using chezmoi
 # --source points to the cloned dotfiles repo (the current directory)
 chezmoi init --source="$(pwd)" --apply
+
+# Install Claude Code CLI if not present
+if ! command -v claude &>/dev/null; then
+    curl -fsSL https://claude.ai/install.sh | bash
+fi
