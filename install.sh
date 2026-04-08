@@ -6,7 +6,8 @@ set -eu
 
 # Install chezmoi if not present
 if ! command -v chezmoi &>/dev/null; then
-    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Apply dotfiles using chezmoi
