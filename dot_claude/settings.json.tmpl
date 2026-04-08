@@ -125,6 +125,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/chezmoi-re-add.sh",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "language": "Japanese",
