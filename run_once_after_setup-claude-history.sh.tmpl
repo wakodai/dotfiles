@@ -21,6 +21,8 @@ fi
 HIST_DIR="$WORKSPACE/.claude-history"
 mkdir -p "$HIST_DIR/projects" "$HIST_DIR/sessions"
 touch "$HIST_DIR/history.jsonl"
+touch "$HIST_DIR/.credentials.json"
+chmod 600 "$HIST_DIR/.credentials.json"
 
 # .git/info/exclude に追加（まだなければ）
 EXCLUDE="$WORKSPACE/.git/info/exclude"
@@ -32,4 +34,5 @@ fi
 mkdir -p "$HOME/.claude"
 ln -sfn "$HIST_DIR/projects"      "$HOME/.claude/projects"
 ln -sfn "$HIST_DIR/sessions"      "$HOME/.claude/sessions"
-ln -sf  "$HIST_DIR/history.jsonl" "$HOME/.claude/history.jsonl"
+ln -sf  "$HIST_DIR/history.jsonl"    "$HOME/.claude/history.jsonl"
+ln -sf  "$HIST_DIR/.credentials.json" "$HOME/.claude/.credentials.json"
