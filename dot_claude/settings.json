@@ -73,7 +73,18 @@
       "Edit(~/.claude/*)",
       "Write(~/.claude/*)",
       "Edit(.claude/*)",
-      "Write(.claude/*)"
+      "Write(.claude/*)",
+      "Bash(chezmoi source-path:*)",
+      "Bash(chezmoi managed:*)",
+      "Bash(chezmoi git:*)",
+      "Bash(chezmoi add:*)",
+      "Bash(chezmoi execute-template:*)",
+      "Bash(chezmoi diff:*)",
+      "Bash(chmod:*)",
+      "Bash(chezmoi apply:*)",
+      "Bash(command:*)",
+      "Bash(chezmoi status:*)",
+      "Bash(chezmoi cat-config:*)"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -94,7 +105,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash {{ .chezmoi.homeDir }}/.claude/statusline-command.sh"
+    "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true
