@@ -1,0 +1,35 @@
+#!/bin/bash
+# devcontainer 環境で Claude Code のランタイムデータをワークスペースに永続化する。
+# chezmoi apply 時に一度だけ実行される。
+
+{{ if not (env "REMOTE_CONTAINERS") }}
+{{   if not (env "CODESPACES") }}
+exit 0
+{{   end }}
+{{ end }}
+
+# ワークスペースを探す
+WORKSPACE=""
+if [ -d "/workspace" ]; then
+  WORKSPACE="/workspace"
+elif [ -n "$CONTAINER_WORKSPACE_FOLDER" ]; then
+  WORKSPACE="$CONTAINER_WORKSPACE_FOLDER"
+else
+  exit 0
+fi
+
+HIST_DIR="$WORKSPACE/.claude-history"
+mkdir -p "$HIST_DIR/projects" "$HIST_DIR/sessions"
+touch "$HIST_DIR/history.jsonl"
+
+# .git/info/exclude に追加（まだなければ）
+EXCLUDE="$WORKSPACE/.git/info/exclude"
+if [ -f "$EXCLUDE" ]; then
+  grep -qxF '.claude-history/' "$EXCLUDE" || echo '.claude-history/' >> "$EXCLUDE"
+fi
+
+# シンボリックリンク
+mkdir -p "$HOME/.claude"
+ln -sfn "$HIST_DIR/projects"      "$HOME/.claude/projects"
+ln -sfn "$HIST_DIR/sessions"      "$HOME/.claude/sessions"
+ln -sf  "$HIST_DIR/history.jsonl" "$HOME/.claude/history.jsonl"
