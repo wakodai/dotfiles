@@ -175,9 +175,16 @@ Step 3-5: 形式別出力（並列）
 出力ファイル名は**原文の論文タイトル**をベースにする。
 ファイル名にふさわしくない文字（スペース、コロン、スラッシュ等）はアンダースコアに置換する。
 
+**ディレクトリ構成**: ファイル名（拡張子なし）と同名のディレクトリを作成し、
+その中に出力ファイルを配置する。
+
 - 例: "Alpamayo-R1: Bridging Reasoning and Action Prediction for Generalizable Autonomous Driving in the Long Tail"
-  → `Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail.md`
-- HTML版なら `.html`、Canvas版なら `.canvas` を拡張子とする
+  → ディレクトリ: `Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail/`
+  → Markdown: `{dir}/Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail.md`
+  → HTML: `{dir}/Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail.html`
+  → Canvas: `{dir}/Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail.canvas`
+- 複数形式を出力する場合も同一ディレクトリにまとめる
+- ディレクトリが存在しない場合は `mkdir -p` で作成する
 
 #### 論文タイトルの表記
 
