@@ -84,7 +84,8 @@
       "Bash(chezmoi apply:*)",
       "Bash(command:*)",
       "Bash(chezmoi status:*)",
-      "Bash(chezmoi cat-config:*)"
+      "Bash(chezmoi cat-config:*)",
+      "Bash(for *)"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -102,27 +103,6 @@
       "Bash(kill -9 *)"
     ],
     "defaultMode": "default"
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  },
-  "enabledPlugins": {
-    "document-skills@anthropic-agent-skills": true
-  },
-  "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    },
-    "agent-plugins-for-aws": {
-      "source": {
-        "source": "github",
-        "repo": "awslabs/agent-plugins"
-      }
-    }
   },
   "hooks": {
     "PreToolUse": [
@@ -149,6 +129,28 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "agent-plugins-for-aws": {
+      "source": {
+        "source": "github",
+        "repo": "awslabs/agent-plugins"
+      }
+    }
   },
   "language": "Japanese",
   "effortLevel": "high",
