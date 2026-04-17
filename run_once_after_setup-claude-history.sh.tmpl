@@ -19,7 +19,7 @@ else
 fi
 
 HIST_DIR="$WORKSPACE/.claude-history"
-mkdir -p "$HIST_DIR/projects" "$HIST_DIR/sessions"
+mkdir -p "$HIST_DIR/projects" "$HIST_DIR/sessions" "$HIST_DIR/plans"
 touch "$HIST_DIR/history.jsonl"
 touch "$HIST_DIR/.credentials.json"
 chmod 600 "$HIST_DIR/.credentials.json"
@@ -35,4 +35,5 @@ mkdir -p "$HOME/.claude"
 ln -sfn "$HIST_DIR/projects"      "$HOME/.claude/projects"
 ln -sfn "$HIST_DIR/sessions"      "$HOME/.claude/sessions"
 ln -sf  "$HIST_DIR/history.jsonl"    "$HOME/.claude/history.jsonl"
+ln -sfn "$HIST_DIR/plans"             "$HOME/.claude/plans"
 ln -sf  "$HIST_DIR/.credentials.json" "$HOME/.claude/.credentials.json"
