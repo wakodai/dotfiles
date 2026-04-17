@@ -1,0 +1,4 @@
+[git]
+autoCommit = true
+autoPush   = true
+commitMessageTemplate = "chore(chezmoi): update on {{ .chezmoi.os }} @ {{ .chezmoi.hostname }}"
