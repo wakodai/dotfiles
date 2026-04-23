@@ -154,6 +154,6 @@
   },
   "language": "Japanese",
   "effortLevel": "high",
-  "teammateMode": "tmux",
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "teammateMode": "auto"
 }
