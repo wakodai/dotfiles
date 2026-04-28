@@ -154,6 +154,9 @@
   },
   "language": "Japanese",
   "effortLevel": "high",
-  "skipAutoPermissionPrompt": true,
-  "teammateMode": "auto"
+  "theme": "light",
+  "teammateMode": "auto",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
 }
