@@ -3,6 +3,48 @@
 
 input=$(cat)
 
+# ANSI colors
+CYAN='\033[36m'
+RESET='\033[0m'
+BOLD='\033[1m'
+DIM='\033[2m'
+
+# --- Pattern 4 helpers: fine-grained bar + truecolor gradient ---
+
+# truecolor gradient escape for a percentage (green -> yellow -> red)
+grad() {
+  awk -v pct="$1" 'BEGIN{
+    if (pct < 50) { r = int(pct * 5.1); printf "\033[38;2;%d;200;80m", r }
+    else { g = int(200 - (pct - 50) * 4); if (g < 0) g = 0; printf "\033[38;2;255;%d;60m", g }
+  }'
+}
+
+# fine-grained progress bar (8-step partial blocks)
+make_bar() {
+  awk -v pct="$1" -v width="${2:-10}" 'BEGIN{
+    split(" |▏|▎|▍|▌|▋|▊|▉|█", blocks, "|");
+    if (pct < 0) pct = 0; if (pct > 100) pct = 100;
+    filled = pct * width / 100;
+    full = int(filled);
+    frac = int((filled - full) * 8);
+    b = "";
+    for (i = 0; i < full; i++) b = b "█";
+    if (full < width) {
+      b = b blocks[frac + 1];
+      for (i = 0; i < width - full - 1; i++) b = b "░";
+    }
+    printf "%s", b;
+  }'
+}
+
+# "label <colored-bar> NN%"
+fmt_metric() {
+  label="$1"
+  pct="$2"
+  p=$(echo "$pct" | awk '{printf "%d", $1 + 0.5}')
+  printf '%s %s%s %s%%%s' "$label" "$(grad "$pct")" "$(make_bar "$pct")" "$p" "$RESET"
+}
+
 # Model display name (shorten to just key part in brackets)
 model_full=$(echo "$input" | jq -r '.model.display_name // empty')
 # Extract short name: "Claude 3.5 Sonnet" -> "Sonnet", "Claude Opus 4" -> "Opus 4", etc.
@@ -21,41 +63,22 @@ if [ -n "$project_dir" ] && [ -d "$project_dir/.git" ]; then
   fi
 fi
 
-# Context window usage
-used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+# Metrics: context window + rate limits (5h / 7d)
+ctx_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+week_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 
-# Build progress bar (10 blocks wide)
-progress_bar=""
-if [ -n "$used_pct" ]; then
-  filled=$(echo "$used_pct" | awk '{printf "%d", int($1 / 10 + 0.5)}')
-  if [ "$filled" -gt 10 ]; then filled=10; fi
-  empty=$((10 - filled))
-  bar_filled=""
-  bar_empty=""
-  i=0
-  while [ $i -lt $filled ]; do
-    bar_filled="${bar_filled}█"
-    i=$((i + 1))
-  done
-  i=0
-  while [ $i -lt $empty ]; do
-    bar_empty="${bar_empty}░"
-    i=$((i + 1))
-  done
-  used_int=$(echo "$used_pct" | awk '{printf "%d", int($1 + 0.5)}')
-  # Derive actual token usage from percentage and context window size
-  window_size=$(echo "$input" | jq -r '.context_window.context_window_size // 0')
-  if [ "$window_size" -gt 0 ]; then
-    total_tokens=$(echo "$used_pct $window_size" | awk '{printf "%d", $1 / 100 * $2}')
-    if [ "$total_tokens" -ge 1000 ]; then
-      tokens_str=$(echo "$total_tokens" | awk '{printf "%.1fk", $1 / 1000}')
-    else
-      tokens_str="${total_tokens}"
-    fi
-    progress_bar="${bar_filled}${bar_empty} ${used_int}% (${tokens_str} tokens)"
-  else
-    progress_bar="${bar_filled}${bar_empty} ${used_int}%"
-  fi
+metrics=""
+if [ -n "$ctx_pct" ]; then
+  metrics=$(fmt_metric "ctx" "$ctx_pct")
+fi
+if [ -n "$five_pct" ]; then
+  m=$(fmt_metric "5h" "$five_pct")
+  if [ -n "$metrics" ]; then metrics="${metrics} ${DIM}│${RESET} ${m}"; else metrics="$m"; fi
+fi
+if [ -n "$week_pct" ]; then
+  m=$(fmt_metric "7d" "$week_pct")
+  if [ -n "$metrics" ]; then metrics="${metrics} ${DIM}│${RESET} ${m}"; else metrics="$m"; fi
 fi
 
 # Cost (use the API-provided value if available, otherwise estimate)
@@ -91,13 +114,7 @@ if [ -f "$settings_file" ]; then
   effort=$(jq -r '.effortLevel // empty' "$settings_file" 2>/dev/null)
 fi
 
-# ANSI colors
-CYAN='\033[36m'
-RESET='\033[0m'
-BOLD='\033[1m'
-DIM='\033[2m'
-
-# Line 1: [Model] folder project | branch
+# Line 1: [Model] folder project | branch | effort
 line1=""
 if [ -n "$model_short" ]; then
   line1="${BOLD}${CYAN}[${model_short}]${RESET}"
@@ -112,11 +129,8 @@ if [ -n "$effort" ]; then
   line1="${line1} | ${DIM}effort:${effort}${RESET}"
 fi
 
-# Line 2: progress | $cost | elapsed
-line2=""
-if [ -n "$progress_bar" ]; then
-  line2="${progress_bar}"
-fi
+# Line 2: ctx | 5h | 7d | $cost | elapsed
+line2="$metrics"
 if [ -n "$cost" ]; then
   if [ -n "$line2" ]; then
     line2="${line2} | \$${cost}"
