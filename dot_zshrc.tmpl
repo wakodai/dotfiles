@@ -213,3 +213,84 @@ mp4tomp3 () {
 
   ffmpeg -i "$input" -vn -c:a libmp3lame -q:a 2 "$output"
 }
+
+# brc vpn connect alias
+alias vpn-brc='cd /Users/wakodai/git-repository/tytbrcmap-vpn && ./run.sh'
+
+# HEIC画像をJPGまたはPNGに変換する
+# 使い方:
+#   heic2 jpg IMG_1234.HEIC        # JPG品質90で変換
+#   heic2 jpg 80 IMG_1234.HEIC     # JPG品質80で変換
+#   heic2 jpg 95 *.HEIC            # 複数ファイルを品質95で変換
+#   heic2 png IMG_1234.HEIC        # PNGに変換
+
+heic2() {
+  local fmt="$1"
+  shift
+
+  if [[ -z "$fmt" || $# -eq 0 ]]; then
+    echo "使い方: heic2 jpg|png [quality] file1.HEIC [file2.HEIC ...]"
+    return 1
+  fi
+
+  local sips_fmt ext quality
+  quality=90
+
+  case "$fmt" in
+    jpg|jpeg)
+      sips_fmt="jpeg"
+      ext="jpg"
+
+      # jpgの場合だけ、第2引数が 0〜100 の数値なら画質として扱う
+      if [[ "$1" =~ '^[0-9]+$' ]]; then
+        quality="$1"
+        shift
+      fi
+
+      if (( quality < 0 || quality > 100 )); then
+        echo "JPG品質は 0〜100 で指定してください"
+        return 1
+      fi
+      ;;
+    png)
+      sips_fmt="png"
+      ext="png"
+      ;;
+    *)
+      echo "出力形式は jpg または png を指定してください"
+      return 1
+      ;;
+  esac
+
+  if [[ $# -eq 0 ]]; then
+    echo "変換するファイルを指定してください"
+    return 1
+  fi
+
+  local f base out
+
+  for f in "$@"; do
+    if [[ ! -f "$f" ]]; then
+      echo "見つかりません: $f"
+      continue
+    fi
+
+    base="${f%.*}"
+    out="${base}.${ext}"
+
+    echo "変換中: $f -> $out"
+
+    if [[ "$sips_fmt" == "jpeg" ]]; then
+      sips -s format "$sips_fmt" -s formatOptions "$quality" "$f" --out "$out" >/dev/null
+    else
+      sips -s format "$sips_fmt" "$f" --out "$out" >/dev/null
+    fi
+  done
+}
+
+# confluence-cli の認証情報
+# パスワードは macOS Keychain から読み出す（平文を git/ディスクに残さない）
+#   登録: security add-generic-password -a "$USER" -s confluence_password -w
+export CONFLUENCE_BASE_URL="https://kurusugawa.jp/confluence"
+export CONFLUENCE_USER_NAME="wako_daisuke"
+export CONFLUENCE_USER_PASSWORD="$(security find-generic-password -a "$USER" -s confluence_password -w 2>/dev/null)"
