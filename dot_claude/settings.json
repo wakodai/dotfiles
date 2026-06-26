@@ -153,7 +153,8 @@
     }
   },
   "language": "Japanese",
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "theme": "auto",
   "teammateMode": "auto",
   "remoteControlAtStartup": true,
