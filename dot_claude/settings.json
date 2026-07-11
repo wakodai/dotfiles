@@ -104,6 +104,7 @@
     ],
     "defaultMode": "default"
   },
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -159,6 +160,5 @@
   "teammateMode": "auto",
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "model": "claude-fable-5[1m]"
+  "skipAutoPermissionPrompt": true
 }
