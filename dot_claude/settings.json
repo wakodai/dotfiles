@@ -71,9 +71,7 @@
       "Bash(docker-compose *)",
       "Read(*)",
       "Edit(~/.claude/**)",
-      "Write(~/.claude/**)",
       "Edit(.claude/**)",
-      "Write(.claude/**)",
       "Bash(chezmoi source-path:*)",
       "Bash(chezmoi managed:*)",
       "Bash(chezmoi git:*)",
@@ -137,7 +135,7 @@
   },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": false
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -159,6 +157,5 @@
   "theme": "auto",
   "teammateMode": "auto",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "agentPushNotifEnabled": true
 }
