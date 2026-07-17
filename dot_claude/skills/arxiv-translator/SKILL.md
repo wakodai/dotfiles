@@ -1,10 +1,11 @@
 ---
 name: arxiv-translator
 description: >
-  arXiv論文を日本語に翻訳し、Markdown・HTML・Obsidian Canvas形式で出力するスキル。
-  PDFから本文・表・数式を正確に読み取り、HTML版から図のURLを取得して、原文に忠実な
-  日本語翻訳ドキュメントを生成する。数式はLaTeX形式（KaTeX/MathJax互換）で記述し、
-  末尾に用語集（glossary）を自動生成する。
+  arXiv論文を日本語に翻訳し、3種類のMarkdown（原文・忠実訳・自然な日本語訳）を
+  生成するスキル。HTML・Obsidian Canvas形式の出力にも対応する。
+  PDFから本文・表・数式を正確に読み取り、HTML版から図のURLを取得する。
+  自然な日本語版は原文との意味整合チェックを必須で行う。数式はLaTeX形式
+  （KaTeX/MathJax互換）で記述し、末尾に用語集（glossary）を自動生成する。
   このスキルは、ユーザーがarXivのURLを提示して「日本語にして」「翻訳して」「日本語訳を
   作って」「この論文を読みたい」等と依頼したときにトリガーする。arXiv論文に限らず、
   学術論文のPDF URLを渡された場合や、「論文を日本語で読みたい」という依頼にも使用する。
