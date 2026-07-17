@@ -276,7 +276,8 @@ Step 1-2: 共通処理（逐次）
 
 #### 論文タイトルの表記
 
-論文タイトルは原文（英語）と日本語訳を併記する：
+日本語版（忠実訳・自然版）では、論文タイトルは原文（英語）と日本語訳を併記する。
+原文Markdownでは英語タイトルのみとする：
 
 ```markdown
 # Alpamayo-R1: Bridging Reasoning and Action Prediction for Generalizable Autonomous Driving in the Long Tail
