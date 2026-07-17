@@ -266,10 +266,12 @@ Step 1-2: 共通処理（逐次）
 
 - 例: "Alpamayo-R1: Bridging Reasoning and Action Prediction for Generalizable Autonomous Driving in the Long Tail"
   → ディレクトリ: `Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail/`
-  → Markdown: `{dir}/Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail.md`
-  → HTML: `{dir}/Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail.html`
-  → Canvas: `{dir}/Alpamayo-R1_Bridging_Reasoning_and_Action_Prediction_for_Generalizable_Autonomous_Driving_in_the_Long_Tail.canvas`
-- 複数形式を出力する場合も同一ディレクトリにまとめる
+  → 原文Markdown: `{dir}/{title}.en.md`
+  → 忠実訳Markdown: `{dir}/{title}.ja.md`
+  → 自然な日本語Markdown: `{dir}/{title}.ja-natural.md`
+  → HTML（指定時のみ）: `{dir}/{title}.html`
+  → Canvas（指定時のみ）: `{dir}/{title}.canvas`
+- すべての形式を同一ディレクトリにまとめる
 - ディレクトリが存在しない場合は `mkdir -p` で作成する
 
 #### 論文タイトルの表記
