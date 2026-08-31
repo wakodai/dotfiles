@@ -100,7 +100,7 @@
       "Bash(mkfs *)",
       "Bash(kill -9 *)"
     ],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
   "hooks": {
     "PreToolUse": [
@@ -152,9 +152,10 @@
   },
   "language": "Japanese",
   "effortLevel": "xhigh",
-  "tui": "fullscreen",
+  "tui": "default",
   "theme": "auto",
   "teammateMode": "auto",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "model": "claude-fable-5[1m]"
 }
