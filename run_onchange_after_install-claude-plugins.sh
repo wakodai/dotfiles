@@ -21,7 +21,6 @@ MARKETPLACES=(
 
 # plugin@marketplace 形式
 PLUGINS=(
-  "superpowers@claude-plugins-official"
   "document-skills@anthropic-agent-skills"
 )
 
