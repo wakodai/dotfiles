@@ -104,26 +104,6 @@
     "defaultMode": "auto"
   },
   "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
@@ -132,14 +112,6 @@
             "type": "command",
             "command": "~/.claude/hooks/chezmoi-re-add.sh",
             "timeout": 10
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
           }
         ]
       }
@@ -152,74 +124,6 @@
             "type": "command",
             "command": "~/.claude/hooks/pipe-stage-permissions.sh",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
-    "StopFailure": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
-    "SubagentStop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/wakodai/.config/iterm2/cc-status"
           }
         ]
       }
