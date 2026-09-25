@@ -1,1 +1,7 @@
 **/.DS_Store
+
+# 社内 URL を含むスキルは public な dotfiles には載せない（ローカルにのみ置く）
+.agents/skills/confluence-cli
+.agents/skills/logbook-reports
+.claude/skills/confluence-cli
+.claude/skills/logbook-reports
