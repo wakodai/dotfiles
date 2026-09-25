@@ -288,9 +288,21 @@ heic2() {
   done
 }
 
+{{ if and (hasKey . "confluence_base_url") (hasKey . "confluence_user_name") -}}
 # confluence-cli の認証情報
+# URL とユーザー名は端末ごとの chezmoi 設定（~/.config/chezmoi/chezmoi.toml の [data]）から埋める
 # パスワードは macOS Keychain から読み出す（平文を git/ディスクに残さない）
 #   登録: security add-generic-password -a "$USER" -s confluence_password -w
-export CONFLUENCE_BASE_URL="https://kurusugawa.jp/confluence"
-export CONFLUENCE_USER_NAME="wako_daisuke"
+export CONFLUENCE_BASE_URL="{{ .confluence_base_url }}"
+export CONFLUENCE_USER_NAME="{{ .confluence_user_name }}"
 export CONFLUENCE_USER_PASSWORD="$(security find-generic-password -a "$USER" -s confluence_password -w 2>/dev/null)"
+{{- end }}
+
+alias codex-personal='CODEX_HOME="$HOME/.codex-personal" codex'
+
+wiki(){
+    cd "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/my-llm-wiki"
+}
+
+alias claudep='CLAUDE_CONFIG_DIR=$HOME/.claude-private claude'
+alias mulmo='(cd $HOME/git-repository/mulmoclaude && PATH="$HOME/bin/mulmo-shim:$PATH" CLAUDE_CONFIG_DIR=$HOME/.claude-private npx mulmoclaude@latest)'

@@ -2,3 +2,8 @@
 autoCommit = true
 autoPush   = true
 commitMessageTemplate = "chore(chezmoi): update on {{ .chezmoi.os }} @ {{ .chezmoi.hostname }}"
+
+# 端末ごとの値はリポジトリに入れない。chezmoi init 後に `chezmoi edit-config` で [data] を追加する
+# [data]
+# confluence_base_url = "https://<host>/confluence"
+# confluence_user_name = "<user>"
