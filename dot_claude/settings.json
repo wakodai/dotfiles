@@ -159,6 +159,12 @@
     },
     "claude-fable-5-1": {
       "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
     }
   },
   "tui": "default",
@@ -166,6 +172,5 @@
   "autoCompactEnabled": true,
   "teammateMode": "auto",
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
-  "model": "claude-fable-5-1[1m]"
+  "agentPushNotifEnabled": true
 }
